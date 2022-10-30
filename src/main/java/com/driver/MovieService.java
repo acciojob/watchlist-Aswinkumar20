@@ -78,26 +78,28 @@ public class MovieService {
 
 
 
-//    //    Get List of all movies added: GET /movies/get-all-movies
-////    No params or body required
-////    Return List of movies name(List()) wrapped in a ResponseEntity object
-////    Controller Name - findAllMovies
-//    public List<Movie> findAllMovies(){
-//        return movieRespository.findAllMovies();
-//    }
-//
-////    Delete a director and its movies from the records: DELETE /movies/delete-director-by-name
-////    Pass director’s name as request parameter
-////    Return success message wrapped in a ResponseEntity object
-////    Controller Name - deleteDirectorByName
-//
-//
-//
-//
-////    Delete all directors and all movies by them from the records: DELETE /movies/delete-director-by-name
-////    No params or body required
-////    Return success message wrapped in a ResponseEntity object
-////    Controller Name - deleteAllDirectors
-////    (Note that there can be some movies on your watchlist that aren’t mapped to any of the director. Make sure you do not remove them.)
+
+
+    //    Delete a director and its movies from the records: DELETE /movies/delete-director-by-name
+    //    Pass director’s name as request parameter
+    //    Return success message wrapped in a ResponseEntity object
+    //    Controller Name - deleteDirectorByName
+    public void deleteDirectorByName(String directorName) {
+        movieRespository.deleteDirectorByName(directorName);
+    }
+
+
+
+
+
+
+    //    Delete all directors and all movies by them from the records: DELETE /movies/delete-director-by-name
+    //    No params or body required
+    //    Return success message wrapped in a ResponseEntity object
+    //    Controller Name - deleteAllDirectors
+    //    (Note that there can be some movies on your watchlist that aren’t mapped to any of the director. Make sure you do not remove them.)
+    public void deleteByMap(HashMap<Object, List<Object>> pair) {
+        movieRespository.deleteByMap(pair);
+    }
 
 }

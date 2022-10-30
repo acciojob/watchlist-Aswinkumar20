@@ -1,13 +1,12 @@
 package com.driver;
 
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Repository
@@ -60,5 +59,31 @@ public class MovieRespository {
 
     public List<Movie> getAllMovies() {
         return listOfMovies;
+    }
+
+    public void deleteDirectorByName(String directorName) {
+        for(int i=0; i<listOfDirectors.size(); i++){
+            if(Objects.equals(listOfDirectors.get(i).getName(), directorName)){
+                listOfDirectors.remove(listOfDirectors.get(i));
+            }
+        }
+    }
+
+    public void deleteByMap(HashMap<Object, List<Object>> pair) {
+        // now traverse the map and delete the required data:
+
+        for(Map.Entry<Object, List<Object>> data: pair.entrySet()){
+            if(listOfDirectors.contains(data.getKey())){
+                listOfDirectors.remove((data.getKey()));
+            }
+
+            List<Object> toBeDeleted = data.getValue();
+
+            for (Object o : toBeDeleted) {
+                if (listOfMovies.contains(o)) {
+                    listOfMovies.remove(o);
+                }
+            }
+        }
     }
 }
