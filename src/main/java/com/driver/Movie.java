@@ -7,12 +7,12 @@ public class Movie {
 
     // default constructor w/o parameter:
     public  Movie(){
-        System.out.println("deafult constructor is called");
+
     }
 
 
     // constructor with parameter:
-    public Movie(String name){
+    public Movie(String name, int durationInMinutes, double imdbRating){
         this.name = name;
         this.durationInMinutes = durationInMinutes;
         this.imdbRating = imdbRating;
