@@ -35,7 +35,7 @@ public class MovieRespository {
         return director;
     }
 
-    public Object getMovieByName(String name) {
+    public Movie getMovieByName(String name) {
         int length = listOfMovies.size();
 
         for(int i=0; i<length; i++){
@@ -46,7 +46,7 @@ public class MovieRespository {
         return null;
     }
 
-    public Object getDirectorByName(String name) {
+    public Director getDirectorByName(String name) {
         int length = listOfDirectors.size();
 
         for(int i=0; i<length; i++){
@@ -69,17 +69,17 @@ public class MovieRespository {
         }
     }
 
-    public void deleteByMap(HashMap<Object, List<Object>> pair) {
+    public void deleteByMap(HashMap<Director, List<Movie>> pair) {
         // now traverse the map and delete the required data:
 
-        for(Map.Entry<Object, List<Object>> data: pair.entrySet()){
+        for(Map.Entry<Director, List<Movie>> data: pair.entrySet()){
             if(listOfDirectors.contains(data.getKey())){
                 listOfDirectors.remove((data.getKey()));
             }
 
-            List<Object> toBeDeleted = data.getValue();
+            List<Movie> toBeDeleted = data.getValue();
 
-            for (Object o : toBeDeleted) {
+            for (Movie o : toBeDeleted) {
                 if (listOfMovies.contains(o)) {
                     listOfMovies.remove(o);
                 }

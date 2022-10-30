@@ -22,8 +22,8 @@ public class MovieController {
 
     List<Movie> listOfMovies;
     List<Director> listOfDirector;
-    List<Object> moviesOfDirector;
-    HashMap<Object, List<Object>> pair;             // here list will store all the movies direct by director;
+    List<Movie> moviesOfDirector;
+    HashMap<Director, List<Movie>> pair;             // here list will store all the movies direct by director;
          //director  //movies
 
     // a single director can direct many movies not vice versa:
@@ -72,7 +72,8 @@ public class MovieController {
 
         // now we get those from existing data then pair it to the hashMap:
         moviesOfDirector.add(movieServiceObj.getMovieByName(movieName));
-        pair.put(movieServiceObj.getDirectorByName(directorName),moviesOfDirector);
+        Director new1 = movieServiceObj.getDirectorByName(directorName);
+        pair.put(new1,moviesOfDirector);
         return new ResponseEntity<>("Success", HttpStatus.CREATED);
     }
 
@@ -111,8 +112,8 @@ public class MovieController {
     @GetMapping("/get-movies-by-director-name/{director}")
     public ResponseEntity getMoviesByDirectorName(@PathParam("value") String directorName){
         // get all moviies that pairs with director:
-        for(Map.Entry<Object, List<Object>> data: pair.entrySet()){
-            if(data.getKey() == directorName){
+        for(Map.Entry<Director, List<Movie>> data: pair.entrySet()){
+            if(data.getKey().getName() == directorName){
                 return new ResponseEntity<>(data.getValue(), HttpStatus.OK);
             }
         }
@@ -143,8 +144,8 @@ public class MovieController {
         movieServiceObj.deleteDirectorByName(directorName);
 
 
-        for(Map.Entry<Object, List<Object>> data: pair.entrySet()){
-            if(data.getKey() == directorName){
+        for(Map.Entry<Director, List<Movie>> data: pair.entrySet()){
+            if(data.getKey().getName() == directorName){
                 pair.remove(data);
                 return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
             }
@@ -165,5 +166,11 @@ public class MovieController {
         movieServiceObj.deleteByMap(pair);
 
         return new ResponseEntity<>("Success", HttpStatus.ACCEPTED);
+    }
+
+
+    @GetMapping("/get-map")
+    public ResponseEntity getMap(){
+        return new ResponseEntity<>(pair,HttpStatus.OK);
     }
 }

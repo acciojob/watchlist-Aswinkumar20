@@ -53,7 +53,7 @@ public class MovieService {
     //    Pass movie name as path parameter
     //    Return Movie object wrapped in a ResponseEntity object
     //    Controller Name - getMovieByName
-    public Object getMovieByName(String name) {
+    public Movie getMovieByName(String name) {
         return movieRespository.getMovieByName(name);
     }
 
@@ -63,7 +63,7 @@ public class MovieService {
     //    Return Director object wrapped in a ResponseEntity object
     //    Controller Name - getDirectorByName
 
-    public Object getDirectorByName(String name) {
+    public Director getDirectorByName(String name) {
         return movieRespository.getDirectorByName(name);
     }
 
@@ -98,7 +98,7 @@ public class MovieService {
     //    Return success message wrapped in a ResponseEntity object
     //    Controller Name - deleteAllDirectors
     //    (Note that there can be some movies on your watchlist that aren’t mapped to any of the director. Make sure you do not remove them.)
-    public void deleteByMap(HashMap<Object, List<Object>> pair) {
+    public void deleteByMap(HashMap<Director, List<Movie>> pair) {
         movieRespository.deleteByMap(pair);
     }
 
